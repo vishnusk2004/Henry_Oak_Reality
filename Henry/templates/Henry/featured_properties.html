@@ -1,0 +1,139 @@
+{% load static tailwind_tags %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Henry Oak Reality</title>
+    {% tailwind_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* Neon border effect around the card with a smaller spread */
+        .neon-border-card {
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background-image: linear-gradient(black, black),
+            linear-gradient(135deg, #5d00ff, #00d4ff);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 0 8px rgba(93, 0, 255, 0.4), 0 0 12px rgba(0, 212, 255, 0.5);
+            transition:  0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect with a smoother animation */
+        .neon-border-card:hover {
+            box-shadow: 0 0 12px rgba(93, 0, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.6);
+            transform: translateY(-5px); /* Adds a slight lift on hover */}
+</style>
+<body>
+
+{% include 'Henry/navbar.html' %}
+
+<!-- Featured Properties Section -->
+<section class="bg-gray-800 text-white py-16">
+    <div class="container mx-auto px-4">
+        <!-- Section Heading -->
+        <h2 class="text-4xl font-bold text-center text-white mb-8">Featured Properties</h2>
+        <p class="text-center text-white mb-12">Discover a curated selection of exclusive properties that showcase the best in real estate.</p>
+
+
+        <!-- Properties Grid -->
+        <div id="properties-grid" class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+            <!-- Initial properties loaded here by Django template -->
+            {% for property in properties|slice:":32" %}
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white neon-border-card neon-border-card:hover">
+                <img src="{{ property.cover_image_url }}" alt="Property Image" class="w-full h-48 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4 ">
+                    <h3 class="text-lg font-semibold ">{{ property.title }}</h3>
+                    <p class=" text-sm mb-2">{{ property.location }}</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class=" font-bold">{{ property.price|intcomma }}</span>
+                        <a href="{{ property.site_url }}" target="_blank" class="text-blue-600 font-semibold hover:text-blue-800">View Details</a>
+                    </div>
+                    <div class="flex space-x-4 mt-4">
+                        <span class="flex items-center">
+                            <i class="fas fa-bed text-blue-500 mr-1"></i>
+                            {{ property.bedrooms }} Beds
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-bath text-blue-500 mr-1"></i>
+                            {{ property.bathrooms }} Baths
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-expand-arrows-alt text-blue-500 mr-1"></i>
+                            {{ property.area }} sqft
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+
+        <!-- Show More Button -->
+        <div class="text-center mt-8">
+            <button id="show-more" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">Show More</button>
+        </div>
+    </div>
+</section>
+
+{% include 'Henry/footer.html' %}
+
+<!-- JavaScript to handle "Show More" functionality -->
+<script>
+    // Parse the properties JSON data passed from the view
+    const properties = JSON.parse('{{ properties_json|escapejs }}');
+    let currentIndex = 8;  // Starting index for additional properties
+    const propertiesGrid = document.getElementById('properties-grid');
+    const showMoreButton = document.getElementById('show-more');
+
+    showMoreButton.addEventListener('click', () => {
+        const nextBatch = properties.slice(currentIndex, currentIndex + 8);
+        nextBatch.forEach(item => {
+            const property = item.fields;
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-lg overflow-hidden neon-border-card neon-border-card:hover';
+            card.innerHTML = `
+                <img src="${{property.cover_image_url}}" alt="Property Image" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">${{property.title}}</h3>
+                    <p class="text-gray-600 text-sm mb-2">${{property.location}}</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-gray-800 font-bold">${property.price.toLocaleString()}</span>
+                        <a href="${{property.site_url}}" class="text-blue-600 font-semibold hover:text-blue-800">View Details</a>
+                    </div>
+                    <div class="flex space-x-4 mt-4 text-gray-600">
+                        <span class="flex items-center">
+                            <i class="fas fa-bed text-blue-500 mr-1"></i>
+                            ${{property.bedrooms}} Beds
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-bath text-blue-500 mr-1"></i>
+                            ${{property.bathrooms}} Baths
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-expand-arrows-alt text-blue-500 mr-1"></i>
+                            ${{property.area}} sqft
+                        </span>
+                    </div>
+                </div>
+            `;
+            propertiesGrid.appendChild(card);
+        });
+
+        currentIndex += 8;
+
+        // Hide the button if there are no more properties to load
+        if (currentIndex >= properties.length) {
+            showMoreButton.style.display = 'none';
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

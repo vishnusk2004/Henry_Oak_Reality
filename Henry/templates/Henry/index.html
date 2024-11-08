@@ -1,0 +1,517 @@
+{% load static tailwind_tags %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Henry Oak Reality</title>
+    {% tailwind_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<!-- Add the following CSS to hide the scrollbar -->
+<style>
+    /* Hide scrollbar for Chrome, Safari, and Edge */
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for Firefox */
+    .hide-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Neon border effect around the card with a smaller spread */
+        .neon-border-card {
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background-image: linear-gradient(black, black),
+            linear-gradient(135deg, #5d00ff, #00d4ff);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 0 8px rgba(93, 0, 255, 0.4), 0 0 12px rgba(0, 212, 255, 0.5);
+            transition:  0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect with a smoother animation */
+        .neon-border-card:hover {
+            box-shadow: 0 0 12px rgba(93, 0, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.6);
+            transform: translateY(-5px); /* Adds a slight lift on hover */}
+</style>
+<body class="bg-gray-900">
+
+    {% include 'Henry/navbar.html' %}
+
+
+    <!-- Hero Section -->
+    <section class="bg-cover bg-center h-screen" style="background-image: url('https://static.wixstatic.com/media/4eb8f6_00c3ca9d7d7647348845cb3a692acf62~mv2.jpg');">
+        <div class="bg-black bg-opacity-50 h-full flex items-center justify-center text-white text-center">
+            <div class="px-4">
+                <h1 class="text-4xl font-bold mb-4">Find Your Dream Home with Henry Oak Realty</h1>
+                <p class="text-lg mb-6">Discover the best properties and insights with our AI-powered real estate solutions.</p>
+                <a href="{% url 'featured_properties' %}" class="bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">Browse Listings</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Video Section -->
+    <section class="bg-gray-800 py-8 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-6">Explore Our Properties</h2>
+            <div class="aspect-w-16 aspect-h-9">
+                <video controls class="w-full h-auto rounded-lg shadow-lg">
+                    <source src="https://video.wixstatic.com/video/4eb8f6_6d476c54748946188815d5f13193a585/1080p/mp4/file.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Featured Properties Section -->
+
+    <section class="bg-gray-900 py-8">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-white text-center mb-4 ">Featured Properties</h2>
+        <p class="text-center text-gray-400 mb-6">Check out some of our most exclusive houses, apartments, townhomes, penthouses, and more.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+            <!-- Property Card 1 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white">
+                <img src="https://static.wixstatic.com/media/4eb8f6_12dd7f5ab6cb49b5974019a73f043f79~mv2_d_2800_1600_s_2.png/v1/fill/w_1205,h_689,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/4eb8f6_12dd7f5ab6cb49b5974019a73f043f79~mv2_d_2800_1600_s_2.png" alt="Property 1" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$58,500,000</h3>
+                    <p class="text-gray-600 text-sm">548 West 22nd St, New York, NY 10011</p>
+                    <p class="text-gray-600 text-xs mt-1">0 Beds • 45,000 sq.ft.</p>
+                </div>
+            </div>
+
+            <!-- Property Card 2 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white ">
+                <img src="https://static.wixstatic.com/media/4eb8f6_9f75dcea435845f0bdc27550cb305fe3~mv2.jpg" alt="Property 2" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$35,000,000</h3>
+                    <p class="text-gray-600 text-sm">41 East 62nd Street, New York, NY 10065</p>
+                    <p class="text-gray-600 text-xs mt-1">5 Beds • 4 Full Baths • 16,000 sq.ft.</p>
+                </div>
+            </div>
+
+            <!-- Property Card 3 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white">
+                <img src="https://static.wixstatic.com/media/4eb8f6_4b6d8008197b4fd9adc654bb2265ce57~mv2.jpg/v1/fill/w_1033,h_689,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/4eb8f6_4b6d8008197b4fd9adc654bb2265ce57~mv2.jpg" alt="Property 3" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$17,900,000</h3>
+                    <p class="text-gray-600 text-sm">250 W San Marino Dr, Miami Beach, FL 33139</p>
+                    <p class="text-gray-600 text-xs mt-1">3 Beds • 3 Full Baths • 4,434 sq.ft.</p>
+                </div>
+            </div>
+
+            <!-- Property Card 4 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white ">
+                <img src="https://static.wixstatic.com/media/4eb8f6_17638737f4664711bd0cc86f3b2d8fe7~mv2.jpg/v1/fill/w_1224,h_689,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/4eb8f6_17638737f4664711bd0cc86f3b2d8fe7~mv2.jpg" alt="Property 4" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$16,500,000</h3>
+                    <p class="text-gray-600 text-sm">65 Central Park West PH, New York, NY 10023</p>
+                    <p class="text-gray-600 text-xs mt-1">4 Beds • 5 Full Baths</p>
+                </div>
+            </div>
+
+            <!-- Add more property cards as needed -->
+
+            <!-- Property Card 1 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white">
+                <img src="https://static.wixstatic.com/media/4eb8f6_00c3ca9d7d7647348845cb3a692acf62~mv2.jpg" alt="Property 1" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$58,500,000</h3>
+                    <p class="text-gray-600 text-sm">548 West 22nd St, New York, NY 10011</p>
+                    <p class="text-gray-600 text-xs mt-1">0 Beds • 45,000 sq.ft.</p>
+                </div>
+            </div>
+
+            <!-- Property Card 2 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white">
+                <img src="https://static.wixstatic.com/media/4eb8f6_7e58288d8db646e2a6de01697d7dc14f~mv2.jpg" alt="Property 4" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$16,500,000</h3>
+                    <p class="text-gray-600 text-sm">65 Central Park West PH, New York, NY 10023</p>
+                    <p class="text-gray-600 text-xs mt-1">4 Beds • 5 Full Baths</p>
+                </div>
+            </div>
+
+
+
+            <!-- Property Card 3 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white">
+                <img src="https://static.wixstatic.com/media/4eb8f6_6a3113fc3109409ab4d05ffbb8154a2f~mv2_d_2800_1600_s_2.png/v1/fill/w_1205,h_689,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/4eb8f6_6a3113fc3109409ab4d05ffbb8154a2f~mv2_d_2800_1600_s_2.png" alt="Property 3" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$17,900,000</h3>
+                    <p class="text-gray-600 text-sm">250 W San Marino Dr, Miami Beach, FL 33139</p>
+                    <p class="text-gray-600 text-xs mt-1">3 Beds • 3 Full Baths • 4,434 sq.ft.</p>
+                </div>
+            </div>
+
+            <!-- Property Card 4 -->
+            <div class="relative rounded-lg overflow-hidden shadow-lg bg-white ">
+                <img src="https://static.wixstatic.com/media/4eb8f6_9f75dcea435845f0bdc27550cb305fe3~mv2.jpg" alt="Property 2" class="w-full h-64 object-cover">
+                <div class="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 text-xs font-semibold uppercase">For Sale</div>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-gray-800">$35,000,000</h3>
+                    <p class="text-gray-600 text-sm">41 East 62nd Street, New York, NY 10065</p>
+                    <p class="text-gray-600 text-xs mt-1">5 Beds • 4 Full Baths • 16,000 sq.ft.</p>
+                </div>
+            </div>
+
+
+
+
+
+            </div>
+
+<!-- View More Button -->
+<div class="flex justify-center mt-8 bg-gray-900">
+    <a href="{% url 'featured_properties' %}" target="_blank" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded shadow hover:bg-blue-700 transition">View More</a>
+</div>
+
+
+
+
+<!-- Why Buy Now Section -->
+<section class="bg-gray-800 py-16 px-4 text-white">
+    <div class="container mx-auto max-w-5xl">
+
+        <!-- Header -->
+        <h2 class="text-4xl font-bold text-center text-white mb-10">Why Now is the Perfect Time to Buy a Home</h2>
+
+        <!-- Key Points Section -->
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- Low Interest Rates -->
+            <div class="flex items-start p-6 bg-white rounded-lg shadow-lg border-4 border-transparent bg-clip-padding" style="background-image: linear-gradient(#fff, #fff), radial-gradient(circle at top left, #3b82f6, #9333ea); background-origin: border-box;">
+                <div class="p-3 bg-blue-200 rounded-full">
+                    <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M6 2a2 2 0 00-2 2v1H2v2h2v1H2v2h2v1H2v2h2v1H2v2h2v1a2 2 0 002 2h8a2 2 0 002-2v-1h2v-2h-2v-1h2v-2h-2v-1h2V8h-2V7h2V5h-2V4a2 2 0 00-2-2H6z"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Historic Low Interest Rates</h3>
+                    <p class="mt-2 text-gray-600">Take advantage of today’s low interest rates, making homeownership more affordable than ever.</p>
+                </div>
+            </div>
+
+            <!-- Investment Potential -->
+            <div class="flex items-start p-6 bg-white rounded-lg shadow-lg border-4 border-transparent bg-clip-padding" style="background-image: linear-gradient(#fff, #fff), radial-gradient(circle at top left, #22c55e, #9333ea); background-origin: border-box;">
+                <div class="p-3 bg-green-200 rounded-full">
+                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1V5a1 1 0 00-1-1H5zm4 2a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V6z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-xl font-semibold text-gray-800">High Investment Potential</h3>
+                    <p class="mt-2 text-gray-600">Real estate is a stable investment that often appreciates over time, adding long-term value.</p>
+                </div>
+            </div>
+
+            <!-- Stability and Security -->
+            <div class="flex items-start p-6 bg-white rounded-lg shadow-lg border-4 border-transparent bg-clip-padding" style="background-image: linear-gradient(#fff, #fff), radial-gradient(circle at top left, #facc15, #9333ea); background-origin: border-box;">
+                <div class="p-3 bg-yellow-200 rounded-full">
+                    <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3-8H7v-1h6v1z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Stability and Security</h3>
+                    <p class="mt-2 text-gray-600">Homeownership offers a sense of stability and financial security, especially in uncertain times.</p>
+                </div>
+            </div>
+
+            <!-- Freedom to Personalize -->
+            <div class="flex items-start p-6 bg-white rounded-lg shadow-lg border-4 border-transparent bg-clip-padding" style="background-image: linear-gradient(#fff, #fff), radial-gradient(circle at top left, #c084fc, #9333ea); background-origin: border-box;">
+                <div class="p-3 bg-purple-200 rounded-full">
+                    <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M12 1a2 2 0 012 2v1h1a2 2 0 012 2v1h1a2 2 0 012 2v2h-2V8H3v8h6v2H4a2 2 0 01-2-2V5a2 2 0 012-2h1V2a2 2 0 012-2h6zM8 6h4v8H8V6z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Freedom to Personalize</h3>
+                    <p class="mt-2 text-gray-600">Design a space that reflects your personality and style—make it truly your own.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Motivational Summary -->
+        <div class="text-center mt-12">
+            <h3 class="text-2xl font-bold mb-4">Don’t Miss Out on This Opportunity!</h3>
+            <p class="text-lg text-white mb-8">
+                The market is competitive, but with our expert agents by your side, you can seize the right opportunities. Ready to make your dream home a reality?
+            </p>
+            <a href="#contact-agent" class="inline-block bg-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">
+                JOIN US
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+
+    <!-- Latest Development -->
+<section class="bg-gray-900 py-12 text-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">The Latest Developments</h2>
+        <p class="text-center text-gray-600 mb-8">Explore transformative new buildings that elevate modern luxury living.</p>
+
+        <!-- Horizontal Scrollable Section -->
+        <div class="flex gap-6 overflow-x-auto pb-4 hide-scrollbar ">
+            <!-- Card 1 -->
+            <div class="flex-shrink-0 w-64 relative overflow-hidden rounded-lg shadow-lg neon-border-card">
+                <img src="https://static.wixstatic.com/media/4eb8f6_00c3ca9d7d7647348845cb3a692acf62~mv2.jpg" alt="Development 1" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Mercedes-Benz Places</h3>
+                    <p class="text-gray-200">Miami, Florida</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flex-shrink-0 w-64 relative overflow-hidden rounded-lg shadow-lg neon-border-card">
+                <img src="https://static.wixstatic.com/media/4eb8f6_9f75dcea435845f0bdc27550cb305fe3~mv2.jpg" alt="Development 2" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">200 Amsterdam</h3>
+                    <p class="text-gray-200">New York, NY</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flex-shrink-0 w-64 relative overflow-hidden rounded-lg shadow-lg neon-border-card">
+                <img src="https://static.wixstatic.com/media/4eb8f6_00c3ca9d7d7647348845cb3a692acf62~mv2.jpg" alt="Development 3" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Brooklyn Point</h3>
+                    <p class="text-gray-200">Brooklyn, NY</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="flex-shrink-0 w-64 relative overflow-hidden rounded-lg shadow-lg neon-border-card">
+                <img src="https://static.wixstatic.com/media/4eb8f6_7e58288d8db646e2a6de01697d7dc14f~mv2.jpg" alt="Development 4" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">75 1st Avenue</h3>
+                    <p class="text-gray-200">New York, NY</p>
+                </div>
+            </div>
+
+            <!-- Card 5 (New) -->
+            <div class="flex-shrink-0 w-64 relative overflow-hidden rounded-lg shadow-lg neon-border-card">
+                <img src="https://static.wixstatic.com/media/4eb8f6_6a3113fc3109409ab4d05ffbb8154a2f~mv2_d_2800_1600_s_2.png/v1/fill/w_1205,h_689,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/4eb8f6_6a3113fc3109409ab4d05ffbb8154a2f~mv2_d_2800_1600_s_2.png" alt="Development 5" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">One Park Grove</h3>
+                    <p class="text-gray-200">Miami, Florida</p>
+                </div>
+            </div>
+
+            <!-- Card 6 (New) -->
+            <div class="flex-shrink-0 w-64 relative overflow-hidden rounded-lg shadow-lg neon-border-card">
+                <img src="https://static.wixstatic.com/media/4eb8f6_17638737f4664711bd0cc86f3b2d8fe7~mv2.jpg/v1/fill/w_1224,h_689,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/4eb8f6_17638737f4664711bd0cc86f3b2d8fe7~mv2.jpg" alt="Development 6" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Residences by Armani/Casa</h3>
+                    <p class="text-gray-200">Sunny Isles Beach, FL</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Stats Section -->
+<section class="bg-gray-900 py-16 text-white" id="stats-section">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">Our Achievements</h2>
+        <p class="text-lg text-gray-400 mb-12">Join our satisfied clients and explore the work we’ve delivered in real estate and beyond.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Satisfied Customers -->
+            <div>
+                <div class="text-6xl font-bold text-blue-400" id="customers">0</div>
+                <p class="text-xl text-gray-300 mt-2">Satisfied Customers</p>
+            </div>
+
+            <!-- Completed Projects -->
+            <div>
+                <div class="text-6xl font-bold text-green-400" id="projects">0</div>
+                <p class="text-xl text-gray-300 mt-2">Completed Projects</p>
+            </div>
+
+            <!-- Years of Experience -->
+            <div>
+                <div class="text-6xl font-bold text-purple-400" id="experience">0</div>
+                <p class="text-xl text-gray-300 mt-2">Years of Experience</p>
+            </div>
+        </div>
+
+        <div class="mt-12">
+            <h3 class="text-2xl font-semibold text-white">Join our community of happy clients!</h3>
+            <p class="text-gray-400 mt-2">We’re dedicated to making your real estate journey smooth, successful, and satisfying.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <!-- Meet Our Team Section -->
+    <section class="bg-gray-800 py-8 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-6">Meet Our Team</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <img src="https://static.wixstatic.com/media/4eb8f6_00c3ca9d7d7647348845cb3a692acf62~mv2.jpg" alt="Team Member 1" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md">
+                    <h3 class="text-lg font-semibold">John Doe</h3>
+                    <p class="text-gray-400">Real Estate Agent</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://static.wixstatic.com/media/4eb8f6_9f75dcea435845f0bdc27550cb305fe3~mv2.jpg" alt="Team Member 2" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md">
+                    <h3 class="text-lg font-semibold">Jane Smith</h3>
+                    <p class="text-gray-400">Sales Manager</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://static.wixstatic.com/media/4eb8f6_00c3ca9d7d7647348845cb3a692acf62~mv2.jpg" alt="Team Member 3" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md">
+                    <h3 class="text-lg font-semibold">Robert Brown</h3>
+                    <p class="text-gray-400">Marketing Specialist</p>
+                </div>
+                <div class="text-center">
+                    <img src="https://static.wixstatic.com/media/4eb8f6_7e58288d8db646e2a6de01697d7dc14f~mv2.jpg" alt="Team Member 4" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md">
+                    <h3 class="text-lg font-semibold">Emily Davis</h3>
+                    <p class="text-gray-400">Customer Relations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Testimonials Section -->
+<section class="bg-gray-800 py-16 px-4 text-white" id="testimonials">
+    <div class="container mx-auto max-w-5xl">
+        <h2 class="text-4xl font-bold text-center mb-10 text-white">What Our Clients Say</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial Card 1 -->
+            <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img src="https://via.placeholder.com/60" alt="Client Photo" class="w-14 h-14 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-xl font-semibold">Emily Carter</h3>
+                        <p class="text-gray-400 text-sm">Homeowner in Miami, FL</p>
+                    </div>
+                </div>
+                <p class="text-gray-300">"Henry Oak Realty made the home-buying process so much easier! The team was incredibly knowledgeable and helped us find the perfect home for our family."</p>
+                <div class="mt-4 text-yellow-400">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial Card 2 -->
+            <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img src="https://via.placeholder.com/60" alt="Client Photo" class="w-14 h-14 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-xl font-semibold">John Doe</h3>
+                        <p class="text-gray-400 text-sm">Investor in New York, NY</p>
+                    </div>
+                </div>
+                <p class="text-gray-300">"Working with Henry Oak Realty was a fantastic experience. Their market insights and negotiation skills are second to none. Highly recommended!"</p>
+                <div class="mt-4 text-yellow-400">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial Card 3 -->
+            <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img src="https://via.placeholder.com/60" alt="Client Photo" class="w-14 h-14 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-xl font-semibold">Sarah Williams</h3>
+                        <p class="text-gray-400 text-sm">Homebuyer in Los Angeles, CA</p>
+                    </div>
+                </div>
+                <p class="text-gray-300">"From start to finish, Henry Oak Realty was there every step of the way. They really made us feel like their top priority. Thank you so much!"</p>
+                <div class="mt-4 text-yellow-400">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+{% include 'Henry/footer.html' %}
+
+
+
+
+
+
+
+
+
+<!-- JavaScript for Counter Animation with Intersection Observer -->
+<script>
+    function animateCounter(id, endValue, duration) {
+        const element = document.getElementById(id);
+        let startValue = 0;
+        const intervalTime = duration / endValue;  // Time interval for each increment
+
+        const counterInterval = setInterval(() => {
+            startValue += 1;
+            element.innerText = startValue;
+            if (startValue >= endValue) {
+                clearInterval(counterInterval);
+                element.innerText = endValue + "+"; // Append "+" after it reaches the end value
+            }
+        }, intervalTime);
+    }
+
+    // Intersection Observer to start counter when the section is in view
+    document.addEventListener("DOMContentLoaded", () => {
+        const options = {
+            threshold: 0.5 // Trigger when 50% of the section is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Trigger animations and disconnect observer after the first time
+                    animateCounter("customers", 1000, 1000);  // 1000 satisfied customers in 4 seconds
+                    animateCounter("projects", 500, 1000);    // 500 completed projects in 4 seconds
+                    animateCounter("experience", 7, 1000);   // 10 years of experience in 4 seconds
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        const section = document.getElementById('stats-section');
+        observer.observe(section);
+    });
+</script>
+
+</body>
+</html>

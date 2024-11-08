@@ -1,0 +1,14 @@
+{% load static %}
+
+<!-- Navbar -->
+    <nav class="bg-blue-800 shadow w-full">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-white text-xl font-bold">Henry Oak Reality</div>
+            <ul class="flex space-x-6 text-white font-semibold">
+                <li><a href="{% url 'home' %}" class="hover:text-blue-300">Home</a></li>
+                <li><a href="{% url 'featured_properties' %}" class="hover:text-blue-300">Listings</a></li>
+                <li><a href="#" class="hover:text-blue-300">About Us</a></li>
+                <li><a href="#" class="hover:text-blue-300">Contact</a></li>
+            </ul>
+        </div>
+    </nav>

@@ -1,0 +1,40 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - Henry Oak Realty</title>
+    {% tailwind_css %}
+</head>
+<body>
+{% include 'Henry/navbar.html' %}
+
+<section class="bg-gray-800 text-white py-16">
+    <div class="container mx-auto px-4">
+        <!-- Section Heading -->
+        <h2 class="text-4xl font-bold text-center text-white mb-8">Our Blog</h2>
+        <p class="text-center text-white mb-12">Stay updated with the latest real estate trends, news, and insights.</p>
+
+        <!-- Blog Post Grid -->
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            <!-- Blog Post Card Template -->
+            {% for post in posts %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="{{ post.image_url }}" alt="Blog Post Image" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800">{{ post.title }}</h3>
+                    <p class="text-gray-500 text-sm mb-2">By {{ post.author }} - {{ post.date }}</p>
+                    <p class="text-gray-600 text-sm mb-4">{{ post.excerpt|truncatewords:20 }}</p>
+{#                    <a href="{% url 'blog_detail' post.id %}" class="text-blue-600 font-semibold hover:text-blue-800">Read More</a>#}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include 'Henry/footer.html' %}
+</body>
+</html>
